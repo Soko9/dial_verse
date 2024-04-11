@@ -1,0 +1,42 @@
+name: dial_verse
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_contacts: ^1.1.7+1
+  fpdart: ^1.1.0
+  get: ^4.6.6
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/dv_logo.png
+    - assets/logo_back.png
+    - assets/icons/
+
+  fonts:
+    - family: AudioWide
+      fonts:
+        - asset: fonts/AudioWide-Regular.ttf
+
+    - family: Chango
+      fonts:
+        - asset: fonts/Chango-Regular.ttf
+
+    - family: Caviar
+      fonts:
+        - asset: fonts/CaviarDreams.ttf
+        - asset: fonts/Caviar_Dreams_Bold.ttf
+          weight: 700
