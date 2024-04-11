@@ -29,7 +29,7 @@ flutter:
   fonts:
     - family: AudioWide
       fonts:
-        - asset: fonts/AudioWide-Regular.ttf
+        - asset: fonts/Audiowide-Regular.ttf
 
     - family: Chango
       fonts:
