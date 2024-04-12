@@ -8,8 +8,8 @@ class IDataSource implements DataSource {
   Future<List<Contact>> retrieveAllContacts() async {
     try {
       print("source");
-      if (!await AppPermissions.hasPermissions()) {
-        throw const AppError(message: "Permissions Denied!");
+      if (!await AppPermissions.contactsPermission) {
+        throw const AppError(message: "Contacts permission is denied!");
       }
       final result = await ContactsService.getContacts(withThumbnails: false);
       print(result);
