@@ -1,3 +1,4 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/constants/index.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
 import "package:dial_verse/presentation/widgets/app_bar.dart";
@@ -71,18 +72,20 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   void addContact() {
     if (_formKey.currentState!.validate()) {
-      //   final Contact contact = Contact(
-
-      //   );
-      //   controller.insertNewContact(contact: contact);
-      //   setState(() {
-      //     _first.clear();
-      //     _last.clear();
-      //     _address.clear();
-      //     _emails.clear();
-      //     _phones.clear();
-      //     _phones.add(TextEditingController());
-      //   });
+      final Contact contact = Contact(
+        displayName: "${_first.text.trim()} ${_last.text.trim()}",
+        phones: _phones.map((p) => Item(value: p.text.trim())).toList(),
+        emails: _emails.map((e) => Item(value: e.text.trim())).toList(),
+      );
+      controller.insertNewContact(contact: contact);
+      setState(() {
+        _first.clear();
+        _last.clear();
+        _address.clear();
+        _emails.clear();
+        _phones.clear();
+        _phones.add(TextEditingController());
+      });
     }
   }
 
@@ -143,14 +146,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       },
                     ),
                     const SizedBox(height: 24.0),
-                    TextFormField(
-                      controller: _address,
-                      maxLines: null,
-                      decoration: const InputDecoration(
-                        labelText: "address",
-                      ),
-                    ),
-                    const SizedBox(height: 24.0),
+                    // TextFormField(
+                    //   controller: _address,
+                    //   maxLines: null,
+                    //   decoration: const InputDecoration(
+                    //     labelText: "address",
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 24.0),
                     Row(
                       children: [
                         const Expanded(
