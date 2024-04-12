@@ -1,8 +1,8 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/constants/app_assets.dart";
 import "package:dial_verse/core/constants/app_dimensions.dart";
 import "package:dial_verse/core/theme/app_palette.dart";
 import "package:flutter/material.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 
 class ActivityTile extends StatelessWidget {
   final Contact contact;
@@ -17,17 +17,18 @@ class ActivityTile extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 0,
         ),
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           backgroundColor: AppPalette.primary,
           radius: AppDimensions.avatarRadius,
           child: FittedBox(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.0),
               child: Text(
-                contact.displayName.contains(" ")
-                    ? "${contact.displayName.split(" ")[0][0]}${contact.displayName.split(" ")[1][0]}"
-                    : contact.displayName[0],
-                style: const TextStyle(
+                // contact.displayName.contains(" ")
+                //     ? "${contact.displayName.split(" ")[0][0]}${contact.displayName.split(" ")[1][0]}"
+                //     : contact.displayName[0],
+                "",
+                style: TextStyle(
                   fontSize: 32.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -35,17 +36,19 @@ class ActivityTile extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(
-          contact.displayName,
+        title: const Text(
+          // contact.displayName,
+          "",
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text(
-          contact.phones[0].normalizedNumber,
-          style: const TextStyle(
+        subtitle: const Text(
+          // contact.phones[0].normalizedNumber,
+          "",
+          style: TextStyle(
             fontSize: 14.0,
             color: AppPalette.grey,
             fontWeight: FontWeight.w200,

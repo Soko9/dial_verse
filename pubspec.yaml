@@ -7,11 +7,19 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  # managing contacts
+  contacts_service: ^0.6.3
   flutter:
     sdk: flutter
-  flutter_contacts: ^1.1.7+1
+  
+  # functional programming
   fpdart: ^1.1.0
+
+  # state management, navigation, DI
   get: ^4.6.6
+
+  # handling permissions
+  flutter_easy_permission: ^1.1.2
 
 dev_dependencies:
   flutter_lints: ^3.0.0

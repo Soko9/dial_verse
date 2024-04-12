@@ -1,4 +1,4 @@
-import "package:flutter_contacts/flutter_contacts.dart";
+import "package:contacts_service/contacts_service.dart";
 
 abstract interface class DataSource {
   Future<List<Contact>> retrieveAllContacts();

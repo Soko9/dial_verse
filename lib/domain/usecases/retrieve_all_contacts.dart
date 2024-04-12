@@ -1,6 +1,6 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/usecase.dart";
 import "package:dial_verse/domain/repo/dial_repo.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 import "package:fpdart/fpdart.dart";
 
 import "../../core/resources/app_error.dart";

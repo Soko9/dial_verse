@@ -6,7 +6,6 @@ import "package:dial_verse/presentation/widgets/dv_divider.dart";
 import "package:dial_verse/presentation/widgets/dv_loader.dart";
 import "package:dial_verse/presentation/widgets/dv_message.dart";
 import "package:flutter/material.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 import "package:get/get.dart";
 
 import "../../core/theme/app_palette.dart";
@@ -72,24 +71,18 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   void addContact() {
     if (_formKey.currentState!.validate()) {
-      final Contact contact = Contact(
-        name: Name(
-          first: _first.text.trim(),
-          last: _last.text.trim(),
-        ),
-        addresses: [Address(_address.text.trim())],
-        emails: _emails.map((e) => Email(e.text.trim())).toList(),
-        phones: _phones.map((p) => Phone(p.text.trim())).toList(),
-      );
-      controller.insertNewContact(contact: contact);
-      setState(() {
-        _first.clear();
-        _last.clear();
-        _address.clear();
-        _emails.clear();
-        _phones.clear();
-        _phones.add(TextEditingController());
-      });
+      //   final Contact contact = Contact(
+
+      //   );
+      //   controller.insertNewContact(contact: contact);
+      //   setState(() {
+      //     _first.clear();
+      //     _last.clear();
+      //     _address.clear();
+      //     _emails.clear();
+      //     _phones.clear();
+      //     _phones.add(TextEditingController());
+      //   });
     }
   }
 

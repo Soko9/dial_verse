@@ -1,5 +1,5 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/app_error.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 import "package:fpdart/fpdart.dart";
 
 abstract interface class DialRepo {

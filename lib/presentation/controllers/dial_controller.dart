@@ -1,3 +1,4 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/usecase.dart";
 import "package:dial_verse/domain/usecases/delete_contact.dart";
 import "package:dial_verse/domain/usecases/dial_phone.dart";
@@ -5,7 +6,6 @@ import "package:dial_verse/domain/usecases/insert_contact.dart";
 import "package:dial_verse/domain/usecases/retrieve_all_contacts.dart";
 import "package:dial_verse/domain/usecases/send_sms.dart";
 import "package:dial_verse/domain/usecases/update_contact.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 import "package:get/get.dart";
 
 class DialController extends GetxController {

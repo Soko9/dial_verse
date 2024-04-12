@@ -1,7 +1,7 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/app_error.dart";
 import "package:dial_verse/data/sources/local/data_source.dart";
 import "package:dial_verse/domain/repo/dial_repo.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 import "package:fpdart/fpdart.dart";
 
 class IDialRepo implements DialRepo {

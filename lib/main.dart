@@ -1,13 +1,16 @@
 import "package:dial_verse/app_bindings.dart";
 import "package:dial_verse/core/navigation/app_routes.dart";
 import "package:dial_verse/core/theme/app_theme.dart";
+import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
 //? : update contact tile widget to update and delete contact
 //? : implement data source (contact flutter package)
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppPermissions.requestPermissions();
   runApp(const MainApp());
 }
 

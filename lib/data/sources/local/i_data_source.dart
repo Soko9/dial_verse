@@ -1,18 +1,19 @@
+import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/app_error.dart";
+import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:dial_verse/data/sources/local/data_source.dart";
-import "package:flutter_contacts/flutter_contacts.dart";
 
 class IDataSource implements DataSource {
   @override
   Future<List<Contact>> retrieveAllContacts() async {
     try {
       print("source");
-      if (!await FlutterContacts.requestPermission()) {
-        throw const AppError(message: "Request denied!");
+      if (!await AppPermissions.hasPermissions()) {
+        throw const AppError(message: "Permissions Denied!");
       }
-      final result = await FlutterContacts.getContacts();
+      final result = await ContactsService.getContacts(withThumbnails: false);
       print(result);
-      return [];
+      return result;
     } catch (e) {
       throw AppError(message: e.toString());
     }
