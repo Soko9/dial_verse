@@ -52,12 +52,15 @@ class DialController extends GetxController {
     isLoading = true;
     final result = await _usecaseRetrieveAllContacts(params: Noparams());
     result.fold(
-      (l) => error = l.message,
+      (l) {
+        return error = l.message;
+      },
       (r) {
         contacts = r;
       },
     );
     _clearMess();
+    update();
   }
 
   void callSomeOne({required String number}) async {
@@ -99,8 +102,7 @@ class DialController extends GetxController {
         if (r) _clearMess();
       },
     );
-    _clearMess();
-    update();
+    _getAllContacts();
   }
 
   void updateContact({required Contact contact}) async {
