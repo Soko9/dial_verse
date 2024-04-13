@@ -1,4 +1,3 @@
-import "package:dial_verse/presentation/screens/add_contact_screen.dart";
 import "package:dial_verse/presentation/screens/contacts_screen.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -8,7 +7,6 @@ import "../../presentation/screens/activity_screen.dart";
 abstract class AppRoutes {
   static const String routeActivity = "/";
   static const String routeContacts = "/contacts";
-  static const String routeAddContact = "/addContact";
   static const String routeDial = "/dial";
   static const String routeMessages = "/messages";
 
@@ -27,13 +25,6 @@ abstract class AppRoutes {
     GetPage(
       name: routeContacts,
       page: () => const ContactsScreen(),
-      transition: _transition,
-      transitionDuration: _duration,
-      curve: _curve,
-    ),
-    GetPage(
-      name: routeAddContact,
-      page: () => const AddContactScreen(),
       transition: _transition,
       transitionDuration: _duration,
       curve: _curve,

@@ -1,5 +1,5 @@
-import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/usecase.dart";
+import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/domain/usecases/delete_contact.dart";
 import "package:dial_verse/domain/usecases/dial_phone.dart";
 import "package:dial_verse/domain/usecases/insert_contact.dart";
@@ -44,9 +44,9 @@ class DialController extends GetxController {
   String get error => _error.value;
   set error(String value) => _error.value = value;
 
-  final RxList<Contact> _contacts = RxList.empty(growable: true);
-  List<Contact> get contacts => _contacts;
-  set contacts(List<Contact> value) => _contacts.value = value;
+  final RxList<DVContactEntity> _contacts = RxList.empty(growable: true);
+  List<DVContactEntity> get contacts => _contacts;
+  set contacts(List<DVContactEntity> value) => _contacts.value = value;
 
   void _getAllContacts() async {
     isLoading = true;
@@ -60,6 +60,63 @@ class DialController extends GetxController {
       },
     );
     _clearMess();
+    update();
+  }
+
+  void insertContact({required DVContactEntity contact}) async {
+    isLoading = true;
+    final result = await _usecaseInsertContact(
+      params: ContactParams(contact: contact),
+    );
+    result.fold(
+      (l) {
+        error = l.message;
+      },
+      (r) {
+        if (r) {
+          _clearMess();
+          _getAllContacts();
+        }
+      },
+    );
+    update();
+  }
+
+  void updateContact({required DVContactEntity contact}) async {
+    isLoading = true;
+    final result = await _usecaseUpdateContact(
+      params: ContactParams(contact: contact),
+    );
+    result.fold(
+      (l) {
+        error = l.message;
+      },
+      (r) {
+        if (r) {
+          _clearMess();
+          _getAllContacts();
+        }
+      },
+    );
+    update();
+  }
+
+  void deleteContact({required DVContactEntity contact}) async {
+    isLoading = true;
+    final result = await _usecaseDeleteContact(
+      params: ContactParams(contact: contact),
+    );
+    result.fold(
+      (l) {
+        error = l.message;
+      },
+      (r) {
+        if (r) {
+          _clearMess();
+          _getAllContacts();
+        }
+      },
+    );
     update();
   }
 
@@ -80,47 +137,6 @@ class DialController extends GetxController {
     isLoading = true;
     final result = await _usecaseSendSms(
       params: SmsParams(number: number, message: message),
-    );
-    result.fold(
-      (l) => error = l.message,
-      (r) => r,
-    );
-    _clearMess();
-  }
-
-  void insertNewContact({required Contact contact}) async {
-    print("controller");
-    isLoading = true;
-    final result = await _usecaseInsertContact(
-      params: ContactParams(contact: contact),
-    );
-    result.fold(
-      (l) {
-        error = l.message;
-      },
-      (r) {
-        if (r) _clearMess();
-      },
-    );
-    _getAllContacts();
-  }
-
-  void updateContact({required Contact contact}) async {
-    isLoading = true;
-    final result = await _usecaseUpdateContact(
-      params: ContactParams(contact: contact),
-    );
-    result.fold(
-      (l) => error = l.message,
-      (r) => r,
-    );
-    _clearMess();
-  }
-
-  void deleteContact({required Contact contact}) async {
-    isLoading = true;
-    final result = await _usecaseDeleteContact(
-      params: ContactParams(contact: contact),
     );
     result.fold(
       (l) => error = l.message,

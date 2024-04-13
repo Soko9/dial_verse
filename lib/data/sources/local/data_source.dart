@@ -1,13 +1,13 @@
-import "package:contacts_service/contacts_service.dart";
+import "package:dial_verse/data/models/dv_contact_model.dart";
 
 abstract interface class DataSource {
-  Future<List<Contact>> retrieveAllContacts();
+  Future<List<DVContactModel>> retrieveAllContacts();
 
-  Future<bool> insertContact({required Contact contact});
+  Future<bool> insertContact({required DVContactModel contact});
 
-  Future<bool> updateContact({required Contact contact});
+  Future<bool> updateContact({required DVContactModel contact});
 
-  Future<bool> deleteContact({required Contact contact});
+  Future<bool> deleteContact({required DVContactModel contact});
 
   Future<bool> dialPhone({required String number});
 

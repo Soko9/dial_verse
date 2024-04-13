@@ -8,7 +8,7 @@ PreferredSizeWidget appBar({
   required BuildContext context,
   required String title,
   required bool isSearchable,
-  TextEditingController? searchController,
+  void Function(String value)? onSearch,
   bool? isSearching,
   VoidCallback? onSearchToggle,
   List<Widget>? actions,
@@ -40,11 +40,11 @@ PreferredSizeWidget appBar({
         title: isSearchable
             ? isSearching!
                 ? TextField(
-                    controller: searchController,
                     autofocus: true,
                     decoration: const InputDecoration(
                       hintText: "search contacts",
                     ),
+                    onChanged: onSearch,
                   )
                 : Text(
                     title,

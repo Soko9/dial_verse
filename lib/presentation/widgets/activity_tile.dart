@@ -1,11 +1,11 @@
-import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/constants/app_assets.dart";
 import "package:dial_verse/core/constants/app_dimensions.dart";
 import "package:dial_verse/core/theme/app_palette.dart";
+import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:flutter/material.dart";
 
 class ActivityTile extends StatelessWidget {
-  final Contact contact;
+  final DVContactEntity contact;
 
   const ActivityTile({super.key, required this.contact});
 

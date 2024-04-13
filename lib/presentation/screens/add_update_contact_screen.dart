@@ -1,5 +1,7 @@
-import "package:contacts_service/contacts_service.dart";
+import "dart:math";
+
 import "package:dial_verse/core/constants/index.dart";
+import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
 import "package:dial_verse/presentation/widgets/app_bar.dart";
 import "package:dial_verse/presentation/widgets/dv_button.dart";
@@ -12,29 +14,49 @@ import "package:get/get.dart";
 import "../../core/theme/app_palette.dart";
 import "menu_screen.dart";
 
-class AddContactScreen extends StatefulWidget {
-  const AddContactScreen({super.key});
+class AddUpdateContactScreen extends StatefulWidget {
+  final bool isUpdating;
+  final DVContactEntity? contact;
+
+  const AddUpdateContactScreen({
+    super.key,
+    this.isUpdating = false,
+    this.contact,
+  });
 
   @override
-  State<AddContactScreen> createState() => _AddContactScreenState();
+  State<AddUpdateContactScreen> createState() => _AddUpdateContactScreenState();
 }
 
-class _AddContactScreenState extends State<AddContactScreen> {
+class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
   final TextEditingController _first = TextEditingController();
   final TextEditingController _last = TextEditingController();
-  final TextEditingController _address = TextEditingController();
-  final List<TextEditingController> _emails = List.empty(growable: true);
-  final List<TextEditingController> _phones = [TextEditingController()];
+  List<TextEditingController> _emails = List.empty(growable: true);
+  List<TextEditingController> _phones = [TextEditingController()];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final controller = Get.find<DialController>();
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.isUpdating) {
+      _first.text = widget.contact!.first!;
+      _last.text = widget.contact!.last!;
+      _emails = widget.contact!.emails
+          .map((e) => TextEditingController(text: e))
+          .toList();
+      _phones = widget.contact!.phones
+          .map((p) => TextEditingController(text: p))
+          .toList();
+    }
+  }
+
+  @override
   void dispose() {
     _first.dispose();
     _last.dispose();
-    _address.dispose();
     for (final TextEditingController controller in _emails) {
       controller.dispose();
     }
@@ -70,19 +92,25 @@ class _AddContactScreenState extends State<AddContactScreen> {
     }
   }
 
-  void addContact() {
+  void upsertContact() {
     if (_formKey.currentState!.validate()) {
-      final Contact contact = Contact(
-        givenName: _first.text.trim(),
-        familyName: _last.text.trim(),
-        phones: _phones.map((p) => Item(value: p.text.trim())).toList(),
-        emails: _emails.map((e) => Item(value: e.text.trim())).toList(),
+      final DVContactEntity contact = DVContactEntity(
+        id: widget.isUpdating
+            ? widget.contact!.id
+            : Random().nextInt(999999).toString(),
+        first: _first.text.trim(),
+        last: _last.text.trim(),
+        phones: _phones.map((p) => p.text.trim()).toList(),
+        emails: _emails.map((e) => e.text.trim()).toList(),
       );
-      controller.insertNewContact(contact: contact);
+      if (widget.isUpdating) {
+        controller.updateContact(contact: contact);
+      } else {
+        controller.insertContact(contact: contact);
+      }
       setState(() {
         _first.clear();
         _last.clear();
-        _address.clear();
         _emails.clear();
         _phones.clear();
         _phones.add(TextEditingController());
@@ -147,22 +175,6 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       },
                     ),
                     const SizedBox(height: 24.0),
-                    // TextFormField(
-                    //   controller: _address,
-                    //   maxLines: null,
-                    //   decoration: const InputDecoration(
-                    //     labelText: "address",
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 24.0),
-                    // TextFormField(
-                    //   controller: _address,
-                    //   maxLines: null,
-                    //   decoration: const InputDecoration(
-                    //     labelText: "address",
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 24.0),
                     Row(
                       children: [
                         const Expanded(
@@ -275,7 +287,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     const SizedBox(height: 48.0),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: DVButton(label: "done", onPress: addContact),
+                      child: DVButton(
+                        label: widget.isUpdating ? "update" : "done",
+                        onPress: upsertContact,
+                      ),
                     ),
                     const SizedBox(height: 24.0),
                   ],

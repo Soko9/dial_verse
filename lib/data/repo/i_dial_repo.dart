@@ -1,6 +1,7 @@
-import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/resources/app_error.dart";
+import "package:dial_verse/data/models/dv_contact_model.dart";
 import "package:dial_verse/data/sources/local/data_source.dart";
+import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/domain/repo/dial_repo.dart";
 import "package:fpdart/fpdart.dart";
 
@@ -9,9 +10,8 @@ class IDialRepo implements DialRepo {
   const IDialRepo({required DataSource source}) : _dataSource = source;
 
   @override
-  Future<Either<AppError, List<Contact>>> retrieveAllContacts() async {
+  Future<Either<AppError, List<DVContactModel>>> retrieveAllContacts() async {
     try {
-      print("repo");
       final result = await _dataSource.retrieveAllContacts();
       return right(result);
     } on AppError catch (e) {
@@ -21,12 +21,12 @@ class IDialRepo implements DialRepo {
 
   @override
   Future<Either<AppError, bool>> insertContact({
-    required Contact contact,
+    required DVContactEntity contact,
   }) async {
     print("repo");
     try {
       await _dataSource.insertContact(
-        contact: contact,
+        contact: DVContactModel.fromEntity(entity: contact),
       );
       return right(true);
     } on AppError catch (e) {
@@ -36,11 +36,11 @@ class IDialRepo implements DialRepo {
 
   @override
   Future<Either<AppError, bool>> updateContact({
-    required Contact contact,
+    required DVContactEntity contact,
   }) async {
     try {
       await _dataSource.updateContact(
-        contact: contact,
+        contact: DVContactModel.fromEntity(entity: contact),
       );
       return right(true);
     } on AppError catch (e) {
@@ -50,11 +50,11 @@ class IDialRepo implements DialRepo {
 
   @override
   Future<Either<AppError, bool>> deleteContact({
-    required Contact contact,
+    required DVContactEntity contact,
   }) async {
     try {
       await _dataSource.deleteContact(
-        contact: contact,
+        contact: DVContactModel.fromEntity(entity: contact),
       );
       return right(true);
     } on AppError catch (e) {

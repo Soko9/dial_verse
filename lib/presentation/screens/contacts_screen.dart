@@ -1,5 +1,6 @@
-import "package:dial_verse/core/navigation/app_routes.dart";
+import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
+import "package:dial_verse/presentation/screens/add_update_contact_screen.dart";
 import "package:dial_verse/presentation/widgets/dv_divider.dart";
 import "package:dial_verse/presentation/widgets/dv_loader.dart";
 import "package:dial_verse/presentation/widgets/dv_message.dart";
@@ -20,14 +21,25 @@ class ContactsScreen extends StatefulWidget {
 }
 
 class _ContactsScreenState extends State<ContactsScreen> {
-  final TextEditingController _searchController = TextEditingController();
-
+  List<DVContactEntity> searchedContacts = [];
   bool _isSearching = false;
+  final controller = Get.find<DialController>();
 
   @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    searchedContacts = controller.contacts;
+  }
+
+  void search({required String query}) {
+    final temp = controller.contacts
+        .where(
+          (contact) => contact.first!.startsWith(query),
+        )
+        .toList();
+    setState(() {
+      searchedContacts = temp;
+    });
   }
 
   @override
@@ -39,12 +51,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
         context: context,
         title: "Contacts",
         isSearchable: true,
-        searchController: _searchController,
         isSearching: _isSearching,
+        onSearch: (value) {
+          search(query: value.trim());
+        },
         onSearchToggle: () {
           setState(() {
             _isSearching = !_isSearching;
-            _searchController.clear();
+            searchedContacts = controller.contacts;
           });
         },
         actions: [
@@ -52,7 +66,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.routeAddContact);
+                Get.to(() => const AddUpdateContactScreen());
               },
               icon: const Icon(Icons.person_add_rounded, size: 28.0),
             ),
@@ -83,10 +97,25 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     );
                   }
                   return ListView.builder(
-                    itemCount: controller.contacts.length,
+                    itemCount: searchedContacts.length,
                     shrinkWrap: true,
                     itemBuilder: (_, index) {
-                      return ContactsTile(contact: controller.contacts[index]);
+                      return ContactsTile(
+                        contact: searchedContacts[index],
+                        onEdit: () {
+                          Get.to(
+                            () => AddUpdateContactScreen(
+                              isUpdating: true,
+                              contact: searchedContacts[index],
+                            ),
+                          );
+                        },
+                        onDelete: () {
+                          controller.deleteContact(
+                            contact: searchedContacts[index],
+                          );
+                        },
+                      );
                     },
                   );
                 },
