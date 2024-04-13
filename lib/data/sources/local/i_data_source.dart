@@ -7,12 +7,10 @@ class IDataSource implements DataSource {
   @override
   Future<List<Contact>> retrieveAllContacts() async {
     try {
-      print("source");
       if (!await AppPermissions.contactsPermission) {
         throw const AppError(message: "Contacts permission is denied!");
       }
       final result = await ContactsService.getContacts(withThumbnails: false);
-      print(result);
       return result;
     } catch (e) {
       throw AppError(message: e.toString());
@@ -22,8 +20,8 @@ class IDataSource implements DataSource {
   @override
   Future<void> insertContact({required Contact contact}) async {
     try {
-      print("source");
-      print(contact);
+      final result = await ContactsService.addContact(contact);
+      print(result);
     } catch (e) {
       throw AppError(message: e.toString());
     }
