@@ -100,6 +100,7 @@ class DialController extends GetxController {
       },
     );
     _clearMess();
+    update();
   }
 
   void updateContact({required Contact contact}) async {

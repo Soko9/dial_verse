@@ -1,5 +1,4 @@
 import "package:contacts_service/contacts_service.dart";
-import "package:contacts_service/contacts_service.dart";
 import "package:dial_verse/core/constants/index.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
 import "package:dial_verse/presentation/widgets/app_bar.dart";
