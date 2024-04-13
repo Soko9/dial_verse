@@ -14,12 +14,12 @@ class SmsParams {
   });
 }
 
-class SendSms implements Usecase<void, SmsParams> {
+class SendSms implements Usecase<bool, SmsParams> {
   final DialRepo _dialRepo;
   const SendSms({required DialRepo repo}) : _dialRepo = repo;
 
   @override
-  Future<Either<AppError, void>> call({required SmsParams params}) async =>
+  Future<Either<AppError, bool>> call({required SmsParams params}) async =>
       await _dialRepo.sendSms(
         number: params.number,
         message: params.message,

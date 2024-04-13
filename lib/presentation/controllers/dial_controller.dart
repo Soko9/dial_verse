@@ -92,8 +92,12 @@ class DialController extends GetxController {
       params: ContactParams(contact: contact),
     );
     result.fold(
-      (l) => error = l.message,
-      (r) => r,
+      (l) {
+        error = l.message;
+      },
+      (r) {
+        if (r) _clearMess();
+      },
     );
     _clearMess();
   }

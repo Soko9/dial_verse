@@ -18,49 +18,53 @@ class IDataSource implements DataSource {
   }
 
   @override
-  Future<void> insertContact({required Contact contact}) async {
+  Future<bool> insertContact({required Contact contact}) async {
     try {
-      final result = await ContactsService.addContact(contact);
-      print(result);
+      await ContactsService.addContact(contact);
+      return true;
     } catch (e) {
       throw AppError(message: e.toString());
     }
   }
 
   @override
-  Future<void> updateContact({required Contact contact}) async {
-    try {
-      // TODO
-    } catch (e) {
-      throw AppError(message: e.toString());
-    }
-  }
-
-  @override
-  Future<void> deleteContact({required Contact contact}) async {
+  Future<bool> updateContact({required Contact contact}) async {
     try {
       // TODO
+      return false;
     } catch (e) {
       throw AppError(message: e.toString());
     }
   }
 
   @override
-  Future<void> dialPhone({required String number}) async {
+  Future<bool> deleteContact({required Contact contact}) async {
     try {
       // TODO
+      return false;
     } catch (e) {
       throw AppError(message: e.toString());
     }
   }
 
   @override
-  Future<void> sendSms({
+  Future<bool> dialPhone({required String number}) async {
+    try {
+      // TODO
+      return false;
+    } catch (e) {
+      throw AppError(message: e.toString());
+    }
+  }
+
+  @override
+  Future<bool> sendSms({
     required String number,
     required String message,
   }) async {
     try {
       // TODO
+      return false;
     } catch (e) {
       throw AppError(message: e.toString());
     }

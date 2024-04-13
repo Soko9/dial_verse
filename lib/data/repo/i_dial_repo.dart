@@ -20,7 +20,7 @@ class IDialRepo implements DialRepo {
   }
 
   @override
-  Future<Either<AppError, void>> insertContact({
+  Future<Either<AppError, bool>> insertContact({
     required Contact contact,
   }) async {
     print("repo");
@@ -28,60 +28,60 @@ class IDialRepo implements DialRepo {
       await _dataSource.insertContact(
         contact: contact,
       );
-      return right(null);
+      return right(true);
     } on AppError catch (e) {
       return left(AppError(message: e.message));
     }
   }
 
   @override
-  Future<Either<AppError, void>> updateContact({
+  Future<Either<AppError, bool>> updateContact({
     required Contact contact,
   }) async {
     try {
       await _dataSource.updateContact(
         contact: contact,
       );
-      return right(null);
+      return right(true);
     } on AppError catch (e) {
       return left(AppError(message: e.message));
     }
   }
 
   @override
-  Future<Either<AppError, void>> deleteContact({
+  Future<Either<AppError, bool>> deleteContact({
     required Contact contact,
   }) async {
     try {
       await _dataSource.deleteContact(
         contact: contact,
       );
-      return right(null);
+      return right(true);
     } on AppError catch (e) {
       return left(AppError(message: e.message));
     }
   }
 
   @override
-  Future<Either<AppError, void>> dialPhone({
+  Future<Either<AppError, bool>> dialPhone({
     required String number,
   }) async {
     try {
       await _dataSource.dialPhone(number: number);
-      return right(null);
+      return right(true);
     } on AppError catch (e) {
       return left(AppError(message: e.message));
     }
   }
 
   @override
-  Future<Either<AppError, void>> sendSms({
+  Future<Either<AppError, bool>> sendSms({
     required String number,
     required String message,
   }) async {
     try {
       await _dataSource.sendSms(message: message, number: number);
-      return right(null);
+      return right(true);
     } on AppError catch (e) {
       return left(AppError(message: e.message));
     }

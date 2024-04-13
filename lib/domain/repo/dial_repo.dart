@@ -5,23 +5,23 @@ import "package:fpdart/fpdart.dart";
 abstract interface class DialRepo {
   Future<Either<AppError, List<Contact>>> retrieveAllContacts();
 
-  Future<Either<AppError, void>> insertContact({
+  Future<Either<AppError, bool>> insertContact({
     required Contact contact,
   });
 
-  Future<Either<AppError, void>> updateContact({
+  Future<Either<AppError, bool>> updateContact({
     required Contact contact,
   });
 
-  Future<Either<AppError, void>> deleteContact({
+  Future<Either<AppError, bool>> deleteContact({
     required Contact contact,
   });
 
-  Future<Either<AppError, void>> dialPhone({
+  Future<Either<AppError, bool>> dialPhone({
     required String number,
   });
 
-  Future<Either<AppError, void>> sendSms({
+  Future<Either<AppError, bool>> sendSms({
     required String number,
     required String message,
   });

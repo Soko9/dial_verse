@@ -10,12 +10,12 @@ class ContactParams {
   const ContactParams({required this.contact});
 }
 
-class InsertContact implements Usecase<void, ContactParams> {
+class InsertContact implements Usecase<bool, ContactParams> {
   final DialRepo _dialRepo;
   const InsertContact({required DialRepo repo}) : _dialRepo = repo;
 
   @override
-  Future<Either<AppError, void>> call({required ContactParams params}) async {
+  Future<Either<AppError, bool>> call({required ContactParams params}) async {
     print("usecase");
     return await _dialRepo.insertContact(contact: params.contact);
   }

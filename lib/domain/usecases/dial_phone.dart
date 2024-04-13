@@ -4,11 +4,11 @@ import "package:fpdart/fpdart.dart";
 
 import "../repo/dial_repo.dart";
 
-class DialPhone implements Usecase<void, String> {
+class DialPhone implements Usecase<bool, String> {
   final DialRepo _dialRepo;
   const DialPhone({required DialRepo repo}) : _dialRepo = repo;
 
   @override
-  Future<Either<AppError, void>> call({required String params}) async =>
+  Future<Either<AppError, bool>> call({required String params}) async =>
       await _dialRepo.dialPhone(number: params);
 }
