@@ -1,5 +1,3 @@
-import "dart:math";
-
 import "package:dial_verse/core/constants/index.dart";
 import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
@@ -10,6 +8,7 @@ import "package:dial_verse/presentation/widgets/dv_loader.dart";
 import "package:dial_verse/presentation/widgets/dv_message.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
+import "package:uuid/uuid.dart";
 
 import "../../core/theme/app_palette.dart";
 import "menu_screen.dart";
@@ -95,9 +94,7 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
   void upsertContact() {
     if (_formKey.currentState!.validate()) {
       final DVContactEntity contact = DVContactEntity(
-        id: widget.isUpdating
-            ? widget.contact!.id
-            : Random().nextInt(999999).toString(),
+        id: widget.isUpdating ? widget.contact!.id : const Uuid().v4(),
         first: _first.text.trim(),
         last: _last.text.trim(),
         phones: _phones.map((p) => p.text.trim()).toList(),
