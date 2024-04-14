@@ -9,7 +9,7 @@ abstract class AppTheme {
 
   static InputBorder _border({Color color = AppPalette.primary}) =>
       OutlineInputBorder(
-        borderSide: BorderSide(width: 1.0, color: color),
+        borderSide: BorderSide(width: 1.5, color: color),
         borderRadius: BorderRadius.circular(AppDimensions.inputFieldRadius),
       );
 
@@ -32,6 +32,7 @@ abstract class AppTheme {
           enabledBorder: _border(),
           focusedBorder: _border(),
           errorBorder: _border(color: AppPalette.red),
+          contentPadding: const EdgeInsets.all(12.0),
         ),
       );
 }

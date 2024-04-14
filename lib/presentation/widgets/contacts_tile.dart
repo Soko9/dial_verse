@@ -92,7 +92,7 @@ class ContactsTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          "${contact.displayName}\n${contact.id ?? ""}",
+          contact.displayName,
           maxLines: 2,
           // overflow: TextOverflow.ellipsis,
           style: const TextStyle(

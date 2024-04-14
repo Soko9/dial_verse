@@ -28,13 +28,20 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   void initState() {
     super.initState();
-    searchedContacts = controller.contacts;
+    controller.isLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        searchedContacts = controller.contacts;
+      });
+      controller.isLoading = false;
+    });
   }
 
   void search({required String query}) {
     final temp = controller.contacts
         .where(
-          (contact) => contact.first!.startsWith(query),
+          (contact) =>
+              contact.displayName.toLowerCase().startsWith(query.toLowerCase()),
         )
         .toList();
     setState(() {
