@@ -23,7 +23,6 @@ class IDialRepo implements DialRepo {
   Future<Either<AppError, bool>> insertContact({
     required DVContactEntity contact,
   }) async {
-    print("repo");
     try {
       await _dataSource.insertContact(
         contact: DVContactModel.fromEntity(entity: contact),

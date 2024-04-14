@@ -22,7 +22,7 @@ class DVButton extends StatelessWidget {
           horizontal: 32.0,
         ),
         decoration: BoxDecoration(
-          gradient: AppPalette.primaryGradient,
+          gradient: AppPalette.darkGradient,
           borderRadius: BorderRadius.circular(AppDimensions.inputFieldRadius),
         ),
         child: Text(

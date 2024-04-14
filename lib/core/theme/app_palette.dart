@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
 abstract class AppPalette {
-  static const Color lightPrimary = Color(0xFFF9BE88);
+  static const Color lightPrimary = Color(0xFFFFD2A9);
   static const Color primary = Color(0xFFF49781);
-  static const Color darkPrimary = Color(0xFFF2757C);
+  static const Color darkPrimary = Color(0xFFFF5962);
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF3C3C3C);
@@ -15,10 +15,17 @@ abstract class AppPalette {
   static const Color blue = Color(0xFF2689C9);
   static const Color red = Color(0xFFE93636);
 
-  static final LinearGradient primaryGradient = LinearGradient(
+  static final LinearGradient lightGradient = LinearGradient(
     colors: [lightPrimary.withOpacity(0.15), darkPrimary.withOpacity(0.15)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     tileMode: TileMode.clamp,
+  );
+
+  static const LinearGradient darkGradient = LinearGradient(
+    colors: [lightPrimary, darkPrimary],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    tileMode: TileMode.decal,
   );
 }

@@ -54,6 +54,8 @@ class IDataSource implements DataSource {
           .map(
             (e) => DVContactModel.fromContact(contact: e),
           )
+          .where(
+              (c) => (c.first != null || c.last != null) && c.phones.isNotEmpty)
           .toList();
     } catch (e) {
       throw AppError(message: e.toString());

@@ -101,6 +101,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     shrinkWrap: true,
                     itemBuilder: (_, index) {
                       return ContactsTile(
+                        index: index,
                         contact: searchedContacts[index],
                         onEdit: () {
                           Get.to(

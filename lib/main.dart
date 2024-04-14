@@ -5,8 +5,8 @@ import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-//? : update contact tile widget to update and delete contact
-//? : implement data source (contact flutter package)
+// ?: modify the validators of the contact form
+// ?: add slidables for contact tile and a contact screen
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

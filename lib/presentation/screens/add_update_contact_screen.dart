@@ -41,13 +41,13 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
   void initState() {
     super.initState();
     if (widget.isUpdating) {
-      _first.text = widget.contact!.first!;
-      _last.text = widget.contact!.last!;
+      _first.text = widget.contact!.first ?? "";
+      _last.text = widget.contact!.last ?? "";
       _emails = widget.contact!.emails
           .map((e) => TextEditingController(text: e))
           .toList();
       _phones = widget.contact!.phones
-          .map((p) => TextEditingController(text: p))
+          .map((p) => TextEditingController(text: p!.removeAllWhitespace))
           .toList();
     }
   }

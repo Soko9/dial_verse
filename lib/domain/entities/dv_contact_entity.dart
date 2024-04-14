@@ -13,7 +13,16 @@ class DVContactEntity {
     required this.phones,
   });
 
-  String get displayName => "$first $last";
+  String get displayName {
+    String output = "";
+    if (first != null && last != null) {
+      output = "${first!} ${last!}";
+    } else {
+      if (first != null) output += first!;
+      if (last != null) output += last!;
+    }
+    return output;
+  }
 
   @override
   String toString() {

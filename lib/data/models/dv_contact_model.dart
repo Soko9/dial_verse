@@ -25,10 +25,11 @@ class DVContactModel extends DVContactEntity {
         displayName: "$first $last",
         emails: emails.map((e) => Item(value: e)).toList(),
         phones: phones.map((p) => Item(value: p)).toList(),
-      );
+      )..identifier = id;
 
   factory DVContactModel.fromContact({required Contact contact}) =>
       DVContactModel(
+        id: contact.identifier,
         first: contact.givenName,
         last: contact.familyName,
         emails: contact.emails?.map((e) => e.value).toList() ?? [],

@@ -13,7 +13,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        gradient: AppPalette.primaryGradient,
+        gradient: AppPalette.lightGradient,
         boxShadow: const [
           BoxShadow(
             offset: Offset.zero,
