@@ -43,6 +43,74 @@ class IDataSource implements DataSource {
       emails: ["please@mail.com", "nigga@mail.com"],
       phones: ["+96170413716"],
     ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Yahya",
+      last: "Saadi",
+      emails: [],
+      phones: ["+96170413716"],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Soko",
+      last: "Sakasiko",
+      emails: ["soko@mail.com"],
+      phones: [
+        "+96170413716",
+        "+905347763680",
+      ],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Walid",
+      last: "Mardi",
+      emails: [],
+      phones: [
+        "+96170413716",
+        "+905347763680",
+      ],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Nigga",
+      last: "Please",
+      emails: ["please@mail.com", "nigga@mail.com"],
+      phones: ["+96170413716"],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Yahya",
+      last: "Saadi",
+      emails: [],
+      phones: ["+96170413716"],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Soko",
+      last: "Sakasiko",
+      emails: ["soko@mail.com"],
+      phones: [
+        "+96170413716",
+        "+905347763680",
+      ],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Walid",
+      last: "Mardi",
+      emails: [],
+      phones: [
+        "+96170413716",
+        "+905347763680",
+      ],
+    ),
+    DVContactModel(
+      id: Random().nextInt(999999).toString(),
+      first: "Nigga",
+      last: "Please",
+      emails: ["please@mail.com", "nigga@mail.com"],
+      phones: ["+96170413716"],
+    ),
   ];
 
   @override

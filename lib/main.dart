@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import "package:get/get.dart";
 
 // ?: add more field to the contact
+// ?: add confirmation dialog for deleting a contact
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
