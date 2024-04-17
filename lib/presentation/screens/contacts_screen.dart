@@ -41,7 +41,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
     final temp = controller.contacts
         .where(
           (contact) =>
-              contact.displayName.toLowerCase().startsWith(query.toLowerCase()),
+              contact.first!.toLowerCase().startsWith(query.toLowerCase()) ||
+              contact.last!.toLowerCase().startsWith(query.toLowerCase()),
         )
         .toList();
     setState(() {
