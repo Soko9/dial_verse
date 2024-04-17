@@ -5,8 +5,7 @@ import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-// ?: modify the validators of the contact form
-// ?: add slidables for contact tile and a contact screen
+// ?: add more field to the contact
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,7 @@
 import "package:dial_verse/core/utils/extensions.dart";
 import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:flutter/material.dart";
+import "package:flutter_slidable/flutter_slidable.dart";
 
 import "../../core/constants/app_dimensions.dart";
 import "../../core/theme/app_palette.dart";
@@ -8,15 +9,19 @@ import "../../core/theme/app_palette.dart";
 class ContactsTile extends StatelessWidget {
   final int index;
   final DVContactEntity contact;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final VoidCallback? onCall;
+  final VoidCallback? onSms;
 
   const ContactsTile({
     super.key,
     required this.index,
     required this.contact,
-    required this.onEdit,
-    required this.onDelete,
+    this.onEdit,
+    this.onDelete,
+    this.onCall,
+    this.onSms,
   });
 
   @override
@@ -65,15 +70,75 @@ class ContactsTile extends StatelessWidget {
       _ => AppPalette.darkGradient,
     };
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+    return Slidable(
+      key: ValueKey(index),
+      closeOnScroll: true,
+      startActionPane: ActionPane(
+        motion: const BehindMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) => onDelete!(),
+            backgroundColor: AppPalette.lightPrimary,
+            foregroundColor: AppPalette.black,
+
+            autoClose: true,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4.0),
+              bottomLeft: Radius.circular(4.0),
+            ),
+            icon: Icons.remove,
+            // label: "Delete",
+          ),
+          SlidableAction(
+            onPressed: (context) => onEdit!(),
+            backgroundColor: AppPalette.lightPrimary.withOpacity(0.8),
+            foregroundColor: AppPalette.black,
+            autoClose: true,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(4.0),
+              bottomRight: Radius.circular(4.0),
+            ),
+            icon: Icons.edit,
+            // label: "Edit",
+          ),
+        ],
+      ),
+      endActionPane: ActionPane(
+        motion: const BehindMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) => onCall,
+            backgroundColor: AppPalette.lightPrimary,
+            foregroundColor: AppPalette.black,
+
+            autoClose: true,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4.0),
+              bottomLeft: Radius.circular(4.0),
+            ),
+            icon: Icons.call_rounded,
+            // label: "Delete",
+          ),
+          SlidableAction(
+            onPressed: (context) => onSms,
+            backgroundColor: AppPalette.lightPrimary.withOpacity(0.8),
+            foregroundColor: AppPalette.black,
+            autoClose: true,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(4.0),
+              bottomRight: Radius.circular(4.0),
+            ),
+            icon: Icons.sms_rounded,
+            // label: "Edit",
+          ),
+        ],
+      ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 0,
-        ),
+        contentPadding: EdgeInsets.zero,
         leading: Container(
-          width: AppDimensions.avatarRadius * 2,
-          height: AppDimensions.avatarRadius * 2,
+          width: AppDimensions.avatarRadius * 1.5,
+          height: AppDimensions.avatarRadius * 1.5,
+          margin: const EdgeInsets.only(left: 4.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: linearGradient,
@@ -84,7 +149,7 @@ class ContactsTile extends StatelessWidget {
               child: Text(
                 contact.displayName.split(" ")[0][0].toUpperCase(),
                 style: const TextStyle(
-                  fontSize: 32.0,
+                  fontSize: 26.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -96,24 +161,17 @@ class ContactsTile extends StatelessWidget {
           maxLines: 2,
           // overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-            fontSize: 18.0,
+            fontSize: 16.0,
           ),
         ),
+        isThreeLine: false,
         subtitle: Text(
           contact.phones[0]!,
           style: const TextStyle(
-            fontSize: 14.0,
+            fontSize: 12.0,
             color: AppPalette.grey,
             fontWeight: FontWeight.w200,
           ),
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(onPressed: onEdit, icon: const Icon(Icons.edit)),
-            const SizedBox(width: 8.0),
-            IconButton(onPressed: onDelete, icon: const Icon(Icons.delete)),
-          ],
         ),
       ),
     );

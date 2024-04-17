@@ -152,8 +152,8 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                         labelText: "first name",
                       ),
                       validator: (value) {
-                        if (value!.trim().isEmpty || value.trim().length < 3) {
-                          return "at least 3 characters";
+                        if (value!.trim().isEmpty) {
+                          return "must not be empty";
                         }
                         return null;
                       },
@@ -165,8 +165,8 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                         labelText: "last name",
                       ),
                       validator: (value) {
-                        if (value!.trim().isEmpty || value.trim().length < 3) {
-                          return "at least 3 characters";
+                        if (value!.trim().isEmpty) {
+                          return "must not be empty";
                         }
                         return null;
                       },
