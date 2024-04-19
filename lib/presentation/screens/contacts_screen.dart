@@ -1,6 +1,7 @@
 import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
 import "package:dial_verse/presentation/screens/add_update_contact_screen.dart";
+import "package:dial_verse/presentation/screens/profile.dart";
 import "package:dial_verse/presentation/widgets/dv_divider.dart";
 import "package:dial_verse/presentation/widgets/dv_loader.dart";
 import "package:dial_verse/presentation/widgets/dv_message.dart";
@@ -29,7 +30,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   void initState() {
     super.initState();
     controller.isLoading = true;
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 250), () {
       setState(() {
         searchedContacts = controller.contacts;
       });
@@ -41,8 +42,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
     final temp = controller.contacts
         .where(
           (contact) =>
-              contact.first!.toLowerCase().startsWith(query.toLowerCase()) ||
-              contact.last!.toLowerCase().startsWith(query.toLowerCase()),
+              contact.first.toLowerCase().startsWith(query.toLowerCase()) ||
+              (contact.last != null &&
+                  contact.last!.toLowerCase().startsWith(query.toLowerCase())),
         )
         .toList();
     setState(() {
@@ -111,6 +113,13 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       return ContactsTile(
                         index: index,
                         contact: searchedContacts[index],
+                        onPress: () {
+                          Get.to(
+                            () => Profile(
+                              contact: searchedContacts[index],
+                            ),
+                          );
+                        },
                         onEdit: () {
                           Get.to(
                             () => AddUpdateContactScreen(

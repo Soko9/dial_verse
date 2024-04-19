@@ -23,9 +23,7 @@ class IDataSource implements DataSource {
     DVContactModel(
       id: Random().nextInt(999999).toString(),
       prefix: "Mrs.",
-      first: "My",
-      middle: "Big",
-      last: "Nigga",
+      first: "Nigga",
       city: "Hood",
       country: "Africa",
       emails: [],
@@ -36,6 +34,8 @@ class IDataSource implements DataSource {
       first: "Walid",
       last: "Mardi",
       emails: [],
+      city: "London",
+      country: "UK",
       phones: [
         "+96170413716",
         "+905347763680",
@@ -79,7 +79,7 @@ class IDataSource implements DataSource {
       //       (e) => DVContactModel.fromContact(contact: e),
       //     )
       //     .where(
-      //         (c) => (c.first != null || c.last != null) && c.phones.isNotEmpty)
+      //         (c) => c.first != null && c.phones.isNotEmpty)
       //     .toList();
 
       // ! THIS IS FOR TESTING ONLY

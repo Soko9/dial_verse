@@ -22,6 +22,13 @@ abstract class AppPalette {
     tileMode: TileMode.clamp,
   );
 
+  static final LinearGradient gradient = LinearGradient(
+    colors: [lightPrimary.withOpacity(0.5), darkPrimary.withOpacity(0.5)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    tileMode: TileMode.clamp,
+  );
+
   static const LinearGradient darkGradient = LinearGradient(
     colors: [lightPrimary, darkPrimary],
     begin: Alignment.topLeft,

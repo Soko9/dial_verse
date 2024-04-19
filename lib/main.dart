@@ -5,7 +5,6 @@ import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-// ?: add contact screen
 // ?: add confirmation dialog for deleting a contact
 // ?: add call functionality
 // ?: add sms functionality

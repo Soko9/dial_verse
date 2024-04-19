@@ -1,7 +1,7 @@
 class DVContactEntity {
   final String? id;
   final String? prefix;
-  final String? first;
+  final String first;
   final String? middle;
   final String? last;
   final String? city;
@@ -12,7 +12,7 @@ class DVContactEntity {
   DVContactEntity({
     this.id,
     this.prefix,
-    this.first,
+    required this.first,
     this.middle,
     this.last,
     this.city,
@@ -22,10 +22,13 @@ class DVContactEntity {
   });
 
   String get displayName =>
-      "${first ?? ""}${first == null ? "" : " "}${middle ?? ""}${middle == null ? "" : " "}${last ?? ""}";
+      "$first ${middle ?? ""}${middle == null ? "" : " "}${last ?? ""}";
+
+  String get displayNameLined =>
+      "$first${middle == null || middle!.isEmpty ? "" : "\n$middle"}${last == null || last!.isEmpty ? "" : "\n$last"}";
 
   String get address =>
-      "${city ?? ""}${city == null ? "" : " "}${country ?? ""}";
+      "${city ?? ""}${city == null || city!.isEmpty ? "" : ", "}${country ?? ""}";
 
   @override
   String toString() {

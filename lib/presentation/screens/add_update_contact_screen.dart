@@ -1,4 +1,5 @@
 import "package:dial_verse/core/constants/index.dart";
+import "package:dial_verse/core/navigation/app_routes.dart";
 import "package:dial_verse/domain/entities/dv_contact_entity.dart";
 import "package:dial_verse/presentation/controllers/dial_controller.dart";
 import "package:dial_verse/presentation/widgets/app_bar.dart";
@@ -121,18 +122,23 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
       } else {
         controller.insertContact(contact: contact);
       }
-      setState(() {
-        _prefix.clear();
-        _first.clear();
-        _middle.clear();
-        _last.clear();
-        _city.clear();
-        _country.clear();
-        _emails.clear();
-        _phones.clear();
-        _phones.add(TextEditingController());
-      });
+      clear();
     }
+  }
+
+  void clear() {
+    setState(() {
+      _prefix.clear();
+      _first.clear();
+      _middle.clear();
+      _last.clear();
+      _city.clear();
+      _country.clear();
+      _emails.clear();
+      _phones.clear();
+      _phones.add(TextEditingController());
+    });
+    Get.offAllNamed(AppRoutes.routeContacts);
   }
 
   @override
@@ -144,6 +150,24 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
         context: context,
         title: "Add New Contact",
         isSearchable: false,
+        actions: widget.isUpdating
+            ? [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
+                    onPressed: () {
+                      controller.deleteContact(contact: widget.contact!);
+                      clear();
+                    },
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: AppPalette.red,
+                      size: AppDimensions.menuIconSize,
+                    ),
+                  ),
+                ),
+              ]
+            : null,
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppDimensions.screenPadding),

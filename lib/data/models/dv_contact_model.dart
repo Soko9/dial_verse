@@ -5,7 +5,7 @@ class DVContactModel extends DVContactEntity {
   DVContactModel({
     super.id,
     super.prefix,
-    super.first,
+    required super.first,
     super.middle,
     super.last,
     super.city,
@@ -42,7 +42,7 @@ class DVContactModel extends DVContactEntity {
       DVContactModel(
         id: contact.identifier,
         prefix: contact.prefix,
-        first: contact.givenName,
+        first: contact.givenName!,
         middle: contact.middleName,
         last: contact.familyName,
         city: contact.postalAddresses?.first.city,
