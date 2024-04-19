@@ -28,8 +28,12 @@ class AddUpdateContactScreen extends StatefulWidget {
 }
 
 class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
+  final TextEditingController _prefix = TextEditingController();
   final TextEditingController _first = TextEditingController();
+  final TextEditingController _middle = TextEditingController();
   final TextEditingController _last = TextEditingController();
+  final TextEditingController _city = TextEditingController();
+  final TextEditingController _country = TextEditingController();
   List<TextEditingController> _emails = List.empty(growable: true);
   List<TextEditingController> _phones = [TextEditingController()];
 
@@ -41,8 +45,12 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
   void initState() {
     super.initState();
     if (widget.isUpdating) {
-      _first.text = widget.contact!.first ?? "";
-      _last.text = widget.contact!.last ?? "";
+      _prefix.text = widget.contact?.prefix ?? "";
+      _first.text = widget.contact?.first ?? "";
+      _middle.text = widget.contact?.middle ?? "";
+      _last.text = widget.contact?.last ?? "";
+      _city.text = widget.contact?.city ?? "";
+      _country.text = widget.contact?.country ?? "";
       _emails = widget.contact!.emails
           .map((e) => TextEditingController(text: e))
           .toList();
@@ -54,8 +62,12 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
 
   @override
   void dispose() {
+    _prefix.dispose();
     _first.dispose();
+    _middle.dispose();
     _last.dispose();
+    _city.dispose();
+    _country.dispose();
     for (final TextEditingController controller in _emails) {
       controller.dispose();
     }
@@ -95,8 +107,12 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
     if (_formKey.currentState!.validate()) {
       final DVContactEntity contact = DVContactEntity(
         id: widget.isUpdating ? widget.contact!.id : const Uuid().v4(),
+        prefix: _prefix.text.trim(),
         first: _first.text.trim(),
+        middle: _middle.text.trim(),
         last: _last.text.trim(),
+        city: _city.text.trim(),
+        country: _country.text.trim(),
         phones: _phones.map((p) => p.text.trim()).toList(),
         emails: _emails.map((e) => e.text.trim()).toList(),
       );
@@ -106,8 +122,12 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
         controller.insertContact(contact: contact);
       }
       setState(() {
+        _prefix.clear();
         _first.clear();
+        _middle.clear();
         _last.clear();
+        _city.clear();
+        _country.clear();
         _emails.clear();
         _phones.clear();
         _phones.add(TextEditingController());
@@ -147,16 +167,24 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                   children: [
                     const DVDivider(),
                     TextFormField(
+                      controller: _prefix,
+                      decoration: const InputDecoration(
+                        labelText: "prefix",
+                      ),
+                    ),
+                    const SizedBox(height: 24.0),
+                    TextFormField(
                       controller: _first,
                       decoration: const InputDecoration(
                         labelText: "first name",
                       ),
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return "must not be empty";
-                        }
-                        return null;
-                      },
+                    ),
+                    const SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: _middle,
+                      decoration: const InputDecoration(
+                        labelText: "middle name",
+                      ),
                     ),
                     const SizedBox(height: 24.0),
                     TextFormField(
@@ -164,12 +192,20 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                       decoration: const InputDecoration(
                         labelText: "last name",
                       ),
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return "must not be empty";
-                        }
-                        return null;
-                      },
+                    ),
+                    const SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: _city,
+                      decoration: const InputDecoration(
+                        labelText: "city",
+                      ),
+                    ),
+                    const SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: _country,
+                      decoration: const InputDecoration(
+                        labelText: "country name",
+                      ),
                     ),
                     const SizedBox(height: 24.0),
                     Row(

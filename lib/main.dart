@@ -5,8 +5,11 @@ import "package:dial_verse/core/utils/app_permissions.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-// ?: add more field to the contact
+// ?: add contact screen
 // ?: add confirmation dialog for deleting a contact
+// ?: add call functionality
+// ?: add sms functionality
+// ?: get all the activities of the caller
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
