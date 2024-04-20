@@ -20,6 +20,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(),
       extendBodyBehindAppBar: true,
@@ -29,8 +30,8 @@ class Profile extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox(
-              width: size.width * 0.8,
-              height: size.height * 0.3,
+              width: size.width,
+              height: size.height * 0.28,
               child: CustomPaint(
                 painter: PaintProfileHeader(),
               ),
@@ -47,7 +48,7 @@ class Profile extends StatelessWidget {
             ),
             Positioned(
               width: size.width,
-              top: size.height * 0.1 + size.width * 0.3 + size.height * 0.025,
+              top: size.height * 0.1 + size.width * 0.3,
               right: 0,
               child: Row(
                 children: [
@@ -98,8 +99,7 @@ class Profile extends StatelessWidget {
                           ? size.height * 0.185
                           : size.height * 0.265) +
                   size.height * 0.1 +
-                  size.width * 0.3 +
-                  size.height * 0.025,
+                  size.width * 0.3,
               left: AppDimensions.screenPadding,
               right: 0,
               child: Column(

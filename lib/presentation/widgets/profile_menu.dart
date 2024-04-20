@@ -22,7 +22,7 @@ class ProfileMenu extends StatefulWidget {
 class _ProfileMenuState extends State<ProfileMenu>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
-  final Duration _duration = const Duration(milliseconds: 750);
+  final Duration _duration = const Duration(milliseconds: 450);
   final Curve _curve = Curves.fastOutSlowIn;
   bool _isOpenEdit = false;
   bool _isOpenCall = false;
@@ -50,8 +50,8 @@ class _ProfileMenuState extends State<ProfileMenu>
     return Positioned(
       width: size.width * 0.35,
       height: size.width * 0.35,
-      top: size.height * 0.085,
-      right: size.width * 0.12,
+      top: size.height * 0.075,
+      right: size.width * 0.075,
       child: Stack(
         children: [
           AnimatedPositioned(
@@ -133,12 +133,12 @@ class _ProfileMenuState extends State<ProfileMenu>
                 setState(() {
                   _isOpenSms = !_isOpenSms;
                 });
-                Future.delayed(const Duration(milliseconds: 150), () {
+                Future.delayed(const Duration(milliseconds: 50), () {
                   setState(() {
                     _isOpenCall = !_isOpenCall;
                   });
                 });
-                Future.delayed(const Duration(milliseconds: 300), () {
+                Future.delayed(const Duration(milliseconds: 100), () {
                   setState(() {
                     _isOpenEdit = !_isOpenEdit;
                   });

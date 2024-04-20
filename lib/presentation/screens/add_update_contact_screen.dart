@@ -148,7 +148,7 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
       drawerScrimColor: AppPalette.transparent,
       appBar: appBar(
         context: context,
-        title: "Add New Contact",
+        title: "${widget.isUpdating ? "Update" : "New"} Contact",
         isSearchable: false,
         actions: widget.isUpdating
             ? [
@@ -228,7 +228,7 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                     TextFormField(
                       controller: _country,
                       decoration: const InputDecoration(
-                        labelText: "country name",
+                        labelText: "country",
                       ),
                     ),
                     const SizedBox(height: 24.0),
