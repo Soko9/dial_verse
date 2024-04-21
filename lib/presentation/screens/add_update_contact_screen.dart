@@ -126,6 +126,11 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
     }
   }
 
+  void deleteContact() {
+    controller.deleteContact(contact: widget.contact!);
+    clear();
+  }
+
   void clear() {
     setState(() {
       _prefix.clear();
@@ -155,10 +160,7 @@ class _AddUpdateContactScreenState extends State<AddUpdateContactScreen> {
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: IconButton(
-                    onPressed: () {
-                      controller.deleteContact(contact: widget.contact!);
-                      clear();
-                    },
+                    onPressed: deleteContact,
                     icon: const Icon(
                       Icons.delete_outline,
                       color: AppPalette.red,

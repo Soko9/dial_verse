@@ -52,6 +52,37 @@ class _ContactsScreenState extends State<ContactsScreen> {
     });
   }
 
+  void onSearchToggle() {
+    setState(() {
+      _isSearching = !_isSearching;
+      searchedContacts = controller.contacts;
+    });
+  }
+
+  void goToAddUpdateContact({
+    bool isUpdating = false,
+    DVContactEntity? contact,
+  }) {
+    Get.to(() => AddUpdateContactScreen(
+          isUpdating: isUpdating,
+          contact: contact,
+        ));
+  }
+
+  void goToProfile({required DVContactEntity contact}) {
+    Get.to(
+      () => Profile(
+        contact: contact,
+      ),
+    );
+  }
+
+  void onDelete({required DVContactEntity contact}) {
+    controller.deleteContact(
+      contact: contact,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,22 +93,13 @@ class _ContactsScreenState extends State<ContactsScreen> {
         title: "Contacts",
         isSearchable: true,
         isSearching: _isSearching,
-        onSearch: (value) {
-          search(query: value.trim());
-        },
-        onSearchToggle: () {
-          setState(() {
-            _isSearching = !_isSearching;
-            searchedContacts = controller.contacts;
-          });
-        },
+        onSearch: (value) => search(query: value.trim()),
+        onSearchToggle: onSearchToggle,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: () {
-                Get.to(() => const AddUpdateContactScreen());
-              },
+              onPressed: goToAddUpdateContact,
               icon: const Icon(Icons.person_add_rounded, size: 28.0),
             ),
           ),
@@ -113,33 +135,20 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       return ContactsTile(
                         index: index,
                         contact: searchedContacts[index],
-                        onPress: () {
-                          Get.to(
-                            () => Profile(
-                              contact: searchedContacts[index],
-                            ),
-                          );
-                        },
-                        onEdit: () {
-                          Get.to(
-                            () => AddUpdateContactScreen(
-                              isUpdating: true,
-                              contact: searchedContacts[index],
-                            ),
-                          );
-                        },
-                        onDelete: () {
-                          controller.deleteContact(
-                            contact: searchedContacts[index],
-                          );
-                        },
+                        onPress: () =>
+                            goToProfile(contact: searchedContacts[index]),
+                        onEdit: () => goToAddUpdateContact(
+                          isUpdating: true,
+                          contact: searchedContacts[index],
+                        ),
+                        onDelete: () =>
+                            onDelete(contact: searchedContacts[index]),
                       );
                     },
                   );
                 },
               ),
             ),
-            // const ActivityNavigator(),
           ],
         ),
       ),

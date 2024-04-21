@@ -34,32 +34,13 @@ class ActivityScreen extends StatelessWidget {
             Expanded(
               child: GetBuilder<DialController>(
                 builder: (controller) {
-                  // if (controller.isLoading) {
-                  //   return const DVLoader();
-                  // }
-                  // if (controller.error.isNotEmpty) {
-                  //   return DVMessage(
-                  //     message: controller.error,
-                  //     color: AppPalette.red,
-                  //   );
-                  // }
-                  // if (controller.contacts.isEmpty) {
                   return const DVMessage(
                     message: "No activity yet!",
                     color: AppPalette.grey,
                   );
-                  // }
-                  // return ListView.builder(
-                  //   itemCount: controller.contacts.length,
-                  //   shrinkWrap: true,
-                  //   itemBuilder: (_, index) => ActivityTile(
-                  //     contact: controller.contacts[index],
-                  //   ),
-                  // );
                 },
               ),
             ),
-            // const ActivityNavigator(),
           ],
         ),
       ),
